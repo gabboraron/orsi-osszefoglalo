@@ -1,0 +1,2 @@
+# orsi-osszefoglalo
+osztott rendszerek | 
