@@ -5,7 +5,7 @@
 >
 >[orsi-gyak1](https://github.com/gabboraron/orsi-gyak1)
 
-mintafájlok: [ElsoSzerver.java](https://github.com/gabboraron/orsi-osszefoglalo/blob/master/gy1/ElsoSzerver.java) | [ElsoKliens.java](https://github.com/gabboraron/orsi-osszefoglalo/blob/master/gy1/ElsoKliens.java) | [Szerver2.java](https://github.com/gabboraron/orsi-osszefoglalo/blob/master/gy1/Szerver2.java)
+mintafájlok: [gy1/ElsoSzerver.java](https://github.com/gabboraron/orsi-osszefoglalo/blob/master/gy1/ElsoSzerver.java) | [gy1/ElsoKliens.java](https://github.com/gabboraron/orsi-osszefoglalo/blob/master/gy1/ElsoKliens.java) | [gy1/Szerver2.java](https://github.com/gabboraron/orsi-osszefoglalo/blob/master/gy1/Szerver2.java)
 
 ### Szerver:
 - Első lépésben elindítjuk egy `PORT`-on a `ServerSocket` segítségével: `ServerSocket ss = new ServerSocket(PORT);`
@@ -83,7 +83,7 @@ public class ElsoKliens {
 ### Feladat: `kliens küld -> szerver feldolgoz -> kliens visszakapja a feldolgozott formát`
 eredeti: [gyak2](https://github.com/gabboraron/orsi-gyak2)
 
-fájlok: [mintafájl-0ra lép ki](https://github.com/gabboraron/orsi-osszefoglalo/blob/master/gy2/Szerver3.java) | [saját megoldás-karakteres üzenetre lép ki](https://github.com/gabboraron/orsi-osszefoglalo/blob/master/gy2/server.java)
+fájlok: [gy2/Szerver3.java - mintafájl-0ra lép ki](https://github.com/gabboraron/orsi-osszefoglalo/blob/master/gy2/Szerver3.java) | [gy2/server.java - saját megoldás-karakteres üzenetre lép ki](https://github.com/gabboraron/orsi-osszefoglalo/blob/master/gy2/server.java)
 
 > A kliens küldjön át sorban egész számokat a szervernek. A számokat a kliens egy fájlból olvassa be. A szerver mindegyik számra meghív egy függvényt, ami egész számot készít (mondjuk `n ↦ 2*n+1`), majd az eredményt visszaküldi a kliensnek. A kliens a visszakapott eredményeket egy fájlba írja ki sorban. Ha a `0` szám következne a kliensoldalon, akkor a kliens kilép.
 >
@@ -111,6 +111,8 @@ while (true){
 ---
 ### Feladat: `FTP server`
 eredeti: [gyak3](https://github.com/gabboraron/orsi-gyak3)
+
+fájl: [gy3/Szerver4.java](https://github.com/gabboraron/orsi-osszefoglalo/blob/master/gy3/Szerver4.java)
 > A kliens átküld egy fájlnevet a szervernek. A szerver küldje vissza a fájl tartalmát soronként, ha a fájl létezik, különben pedig egy szöveges hibaüzenetet.
 Lényeges rész:
 ````Java
@@ -129,3 +131,37 @@ static void simpleFtp(Scanner sc, PrintWriter pw) {
 	}
 }
 ````
+---
+### Feladat: egyszerre több kliens ugyanazon a porton vagy másikon!
+eredeti: [gyak4](https://github.com/gabboraron/orsi-gyak4)
+
+fájl: [gy4/Szerver8.java](https://github.com/gabboraron/orsi-osszefoglalo/blob/master/gy4/Szerver8.java)
+Felmerülhet, hogy mi van agyszerre **több klienst szeretnénk kezelni egy szerveren egy `PORT`on**. Megoldásként duplikálhatunk mindent, azaz:
+- Létrehozzuk a `PORT`ot: `int PORT = 12345;` és hallgatózunk rajta: `ServerSocket ss = new ServerSocket(PORT);`
+- Figyelünk egy `Scanner` ésegy `Printwriter`rel, mint eddig: 
+	````Java
+	Socket s1 = ss.accept();
+	Scanner sc1 = new Scanner(s1.getInputStream());
+	PrintWriter pw1 = new PrintWriter(s1.getOutputStream());
+	````
+- Ezt duplikáljuk:
+	````Java
+	Socket s2 = ss.accept();
+	Scanner sc2 = new Scanner(s2.getInputStream());
+	PrintWriter pw2 = new PrintWriter(s2.getOutputStream());
+	````
+- Ezután viszont szabadon kezelhetjük a kettőt, külön, vagy akár egymásnak is átirányíhatjuk
+	````Java
+	String name1 = sc1.nextLine();
+	String name2 = sc2.nextLine();
+	````
+Ugyanakkor **kezelhetjük őket több porton** is:
+- ehhez csak azt kell megváltoztatni, hogy a második `ServerSocket` egy másik porton hallgatózzon:
+	````Java
+	ServerSocket ss2 = new ServerSocket(54321);
+	Socket s2 = ss2.accept();
+	Scanner sc2 = new Scanner(s2.getInputStream());
+	PrintWriter pw2 = new PrintWriter(s2.getOutputStream());
+	````
+[Ezt oldja meg az alábbi feladat is:](https://github.com/gabboraron/orsi-gyak4) 
+> A szerverhez kapcsolódjon két kliens egymás után (ugyanazon a porton) úgy, hogy a szerver mindkét kapcsolatot egyszerre tartja nyitva. A kliensek először egy-egy sorban a saját nevüket küldik át, majd felváltva írhatnak be egy-egy sornyi szöveget. A beírt üzeneteket küldje át a szerver a másik kliensnek ilyen alakban: `<másik kliens neve>: <másik kliens üzenete>`. Ha valamelyik kliens bontja a kapcsolatot, akkor a szerver zárja be a másik klienssel a kapcsolatot, és lépjen ki.
