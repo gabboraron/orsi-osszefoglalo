@@ -196,3 +196,48 @@ public static void main(String[] args) throws Exception {
 ````
 [Ezt oldja meg az alábbi feladat is:](https://github.com/gabboraron/orsi-gyak4) 
 > A szerverhez kapcsolódjon két kliens egymás után (ugyanazon a porton) úgy, hogy a szerver mindkét kapcsolatot egyszerre tartja nyitva. A kliensek először egy-egy sorban a saját nevüket küldik át, majd felváltva írhatnak be egy-egy sornyi szöveget. A beírt üzeneteket küldje át a szerver a másik kliensnek ilyen alakban: `<másik kliens neve>: <másik kliens üzenete>`. Ha valamelyik kliens bontja a kapcsolatot, akkor a szerver zárja be a másik klienssel a kapcsolatot, és lépjen ki.
+
+## Párhuzamosság
+> [kitlei.web.elte.hu/segedanyagok](http://kitlei.web.elte.hu/segedanyagok/felev/2018-2019-tavasz/osztott/osztott-feladatok.html#p%C3%A1rhuzamoss%C3%A1g)
+>
+>[orsi-gyak5](https://github.com/gabboraron/orsi-gyak5)
+
+mintafájlok: [gy5/Parhuzamossag.java](https://github.com/gabboraron/orsi-osszefoglalo/blob/master/gy5/Parhuzamossag.java)
+
+### Server - szálak
+- létrehozunk szálat: `Thread t1 = new Thread()`
+- elindítjuk: `t1.start();`
+- megvárhatjuk, hogy befejezze a futását: `t1.join();`
+egyben: 
+````Java
+Thread t1 = new Thread(() -> {
+	myClass.myFun1();
+	myClass.myFun2();
+});
+Thread t2 = new Thread(() -> {
+	myClass.myFun1();
+	myClass.myFun2();
+});
+
+t1.start();		// versenyhelyzet (race condition)
+t2.start();
+t1.join();
+t2.join();
+````
+- ha valamit szeretnénk elérni mindkét szálról, úgy hogy annak az értéke bizotsan ne módosuljon amíg az egyik szál használja a msáik szál által akkor szinkronizálnunk kell: `synchronized (szinkroizálandó){}`
+egyben:
+````Java
+int[] counter = { 0 };
+
+Thread t1 = new Thread(() -> {
+	for (int i = 0; i < 100000; ++i) {
+		synchronized (counter) {
+			++counter[0];
+		}
+	}
+});
+````
+
+### Kliens - szálak
+Természetesen mindezt a kliensnél is megtehetjük, ha pl [az egyik szálon írunk, másikon olvasunk](https://github.com/gabboraron/orsi-beadando/blob/master/Client.java).
+
