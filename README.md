@@ -5,7 +5,7 @@
 >
 >[orsi-gyak1](https://github.com/gabboraron/orsi-gyak1)
 
-mintafájlok: [ElsoSzerver.java](https://github.com/gabboraron/orsi-osszefoglalo/blob/master/gy1/ElsoSzerver.java) [ElsoKliens.java](https://github.com/gabboraron/orsi-osszefoglalo/blob/master/gy1/ElsoKliens.java) [Szerver2.java](https://github.com/gabboraron/orsi-osszefoglalo/blob/master/gy1/Szerver2.java)
+mintafájlok: [ElsoSzerver.java](https://github.com/gabboraron/orsi-osszefoglalo/blob/master/gy1/ElsoSzerver.java) | [ElsoKliens.java](https://github.com/gabboraron/orsi-osszefoglalo/blob/master/gy1/ElsoKliens.java) | [Szerver2.java](https://github.com/gabboraron/orsi-osszefoglalo/blob/master/gy1/Szerver2.java)
 
 ### Szerver:
 - Első lépésben elindítjuk egy `PORT`-on a `ServerSocket` segítségével: `ServerSocket ss = new ServerSocket(PORT);`
@@ -75,14 +75,15 @@ public class ElsoKliens {
 **`Scanner`nél hasznosak lehetnek:**
 > `sc.hasNextLine()` - várja következő sort vagy a halott servert
 >
-> `sc.hasNext()`     - átugorja az össes whitespacet
+> `sc.hasNext()`     - átugorja az összes whitespacet
 >
 > `sc.hasNextInt()`  - átugorja a whitespaceket és számot vár válaszként
 
-### Feladat: kliens küld -> szerver feldolgoz -> kliens visszakapja a feldolgozottat
+----
+### Feladat: `kliens küld -> szerver feldolgoz -> kliens visszakapja a feldolgozott formát`
 eredeti: [gyak2](https://github.com/gabboraron/orsi-gyak2)
 
-fájlok: [mintafájl-0ra lép ki](https://github.com/gabboraron/orsi-osszefoglalo/blob/master/gy2/Szerver3.java) [saját megoldás-karakteres üzenetre lép ki](https://github.com/gabboraron/orsi-osszefoglalo/blob/master/gy2/server.java)
+fájlok: [mintafájl-0ra lép ki](https://github.com/gabboraron/orsi-osszefoglalo/blob/master/gy2/Szerver3.java) | [saját megoldás-karakteres üzenetre lép ki](https://github.com/gabboraron/orsi-osszefoglalo/blob/master/gy2/server.java)
 
 > A kliens küldjön át sorban egész számokat a szervernek. A számokat a kliens egy fájlból olvassa be. A szerver mindegyik számra meghív egy függvényt, ami egész számot készít (mondjuk `n ↦ 2*n+1`), majd az eredményt visszaküldi a kliensnek. A kliens a visszakapott eredményeket egy fájlba írja ki sorban. Ha a `0` szám következne a kliensoldalon, akkor a kliens kilép.
 >
@@ -104,6 +105,27 @@ while (true){
 			tmp.add(toInt(nr));		//feldolgozás
 		}	
 		answer(tmp, pw);	//válasz
+	}
+}
+````
+---
+### Feladat: `FTP server`
+eredeti: [gyak3](https://github.com/gabboraron/orsi-gyak3)
+> A kliens átküld egy fájlnevet a szervernek. A szerver küldje vissza a fájl tartalmát soronként, ha a fájl létezik, különben pedig egy szöveges hibaüzenetet.
+Lényeges rész:
+````Java
+static void simpleFtp(Scanner sc, PrintWriter pw) {
+	String filename = sc.nextLine();
+
+	try (Scanner scFile = new Scanner(new File(filename))) {
+		while (scFile.hasNextLine()) {
+			String line = scFile.nextLine();
+			pw.println(line);
+		}
+	} catch (IOException e) {
+		pw.println("Error: " + e);
+	} finally {
+		pw.flush();
 	}
 }
 ````
