@@ -224,7 +224,9 @@ t2.start();
 t1.join();
 t2.join();
 ````
-- ha valamit szeretnénk elérni mindkét szálról, úgy hogy annak az értéke bizotsan ne módosuljon amíg az egyik szál használja a msáik szál által akkor szinkronizálnunk kell: `synchronized (szinkroizálandó){}`
+- ebben az esetben 3 szálunk volt: `t1`, `t2`, `main`. Ha nem írjuk ki a `t1.join();`t akkor a `main` nem várja be annak a futánsak a végét és tovább lép. Adott esetben, ha mindez egy `try(){}` blokkban történik akkor a `join()` elhagyásával az erőforrásokat is elengedhetjük, és így például a `t1` szál is megszakad! Jó plda erre a [gy7/MultiThreadChatServer.java](https://github.com/gabboraron/orsi-osszefoglalo/blob/master/gy7/MultiThreadChatServer.java) amiben ha elhagynánk a `join()`okat akkor pont ez történne!
+- ha valamit szeretnénk elérni mindkét szálról, úgy hogy annak az értéke bizotsan ne módosuljon amíg az egyik szál használja a másik szál által akkor szinkronizálnunk kell: `synchronized (szinkroizálandó){}`
+
 egyben:
 ````Java
 int[] counter = { 0 };
@@ -241,7 +243,7 @@ Thread t1 = new Thread(() -> {
 ### Kliens - szálak
 Természetesen mindezt a kliensnél is megtehetjük, ha pl [az egyik szálon írunk, másikon olvasunk](https://github.com/gabboraron/orsi-beadando/blob/master/Client.java).
 
-példa: [kecskés feladat] (https://github.com/gabboraron/orsi-gyak6#kecsk%C3%A9k): [gy6/MyGoats.java](https://github.com/gabboraron/orsi-osszefoglalo/blob/master/gy6/MyGoats.java)
+példa: [kecskés feladat](https://github.com/gabboraron/orsi-gyak6#kecsk%C3%A9k) : [gy6/MyGoats.java](https://github.com/gabboraron/orsi-osszefoglalo/blob/master/gy6/MyGoats.java)
 
 ---
 ### Feladat: párhuzamosított chatserver
@@ -282,4 +284,81 @@ try (
 	}
 }
 ````
-egáész: [gy7/MultiThreadChatServerV3.java](https://github.com/gabboraron/orsi-osszefoglalo/blob/master/gy7/MultiThreadChatServerV3.java)
+egész kód: [gy7/MultiThreadChatServerV3.java](https://github.com/gabboraron/orsi-osszefoglalo/blob/master/gy7/MultiThreadChatServerV3.java)
+
+## Távoli metódushívás
+> [kitlei.web.elte.hu/segedanyagok](http://kitlei.web.elte.hu/segedanyagok/felev/2018-2019-tavasz/osztott/osztott-feladatok.html#t%C3%A1voli-met%C3%B3dush%C3%ADv%C3%A1s)
+>
+>[orsi-gyak8](https://github.com/gabboraron/orsi-gyak8)
+
+### Server - Deploy
+mintafájl: [gy8/RMIDeploy.java](https://github.com/gabboraron/orsi-osszefoglalo/blob/master/gy8/RMIDeploy.java)
+
+Szeretnénk eléréni, hogy a kliens közvetlenül a serveren tudjon függvénykeet, metódusokat, eljárásokat hívni, paraméterezni. A **Deploy**ban létrehozzuk a serverünk pár plédányát:
+- Lefoglaljuk a `PORT`ot, meg egyebet: `Registry registry = LocateRegistry.createRegistry(PORT);`
+- Létrehozzuk ezen a szerverünk egy példányát: ` registry.rebind("rmiAppend", new RemoteAppendTxtServer());`
+```Java
+public static void main(String args[])
+        throws Exception
+    {
+        final int PORT = 12345;
+
+        Registry registry = LocateRegistry.createRegistry(PORT);
+        // Registry registry = LocateRegistry.getRegistry();
+        registry.rebind("rmiAppend", new RemoteAppendTxtServer());
+     }
+````
+
+### Server - server rész
+Ezután mintha egy osztály lenne felkonfiguráljuk, létrehozunk változókat, konstruktorokat:
+mintafájl: [gy8/RemoteAppendTxtServer.java](https://github.com/gabboraron/orsi-osszefoglalo/blob/master/gy8/RemoteAppendTxtServer.java)
+````Java
+public class RemoteAppendTxtServer
+    extends java.rmi.server.UnicastRemoteObject
+    implements RemoteAppendTxtInterface
+{
+    String appendTxt;
+
+    public RemoteAppendTxtServer() throws RemoteException
+    {
+        this("default");
+    }
+    
+    public String appendTxt(String str) throws RemoteException
+    {
+        return str + appendTxt;
+    }
+}  
+````
+
+### Server - interface
+Ezután már csak egy `interface`re van szükségünk, hogy tudjunk kapcsolódni a klienstől:
+mintafájl: [gy8/RemoteAppendTxtInterface.java](https://github.com/gabboraron/orsi-osszefoglalo/blob/master/gy8/RemoteAppendTxtInterface.java)
+````Java
+import java.rmi.*;
+
+public interface RemoteAppendTxtInterface extends Remote
+{
+    String appendTxt(String str) throws RemoteException;
+    // MyData appendTxt(MyData str) throws RemoteException;
+} 
+````
+### Kliens
+A kliensnél létrehozzuk az `interface`nek megfelelő `proxy`nkat: 
+````Java
+RemoteAppendTxtInterface rmiServer = (RemoteAppendTxtInterface)(registry.lookup(srvName));
+````
+Ahol mostantól nyugodtan hívhatjuk az `interface`n megengedett eljárásokat:
+````Java
+String reply = rmiServer.appendTxt(text);
+````
+---
+
+### példa feladat:
+[Lottós feladat](https://github.com/gabboraron/orsi-gyak9) : [Lottós feladat fájljai](https://github.com/gabboraron/orsi-osszefoglalo/tree/master/gy9)
+
+## Adatbázis kezelés
+> [kitlei.web.elte.hu/segedanyagok](http://kitlei.web.elte.hu/segedanyagok/felev/2018-2019-tavasz/osztott/osztott-feladatok.html#adatb%C3%A1ziskezel%C3%A9s)
+>
+> [gy10](https://github.com/gabboraron/orsi-gyak10)
+**A táblákon csak a szokásos SQL parancsok használhatóak!**
