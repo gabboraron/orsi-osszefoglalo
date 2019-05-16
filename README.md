@@ -241,3 +241,45 @@ Thread t1 = new Thread(() -> {
 ### Kliens - szálak
 Természetesen mindezt a kliensnél is megtehetjük, ha pl [az egyik szálon írunk, másikon olvasunk](https://github.com/gabboraron/orsi-beadando/blob/master/Client.java).
 
+példa: [kecskés feladat] (https://github.com/gabboraron/orsi-gyak6#kecsk%C3%A9k): [gy6/MyGoats.java](https://github.com/gabboraron/orsi-osszefoglalo/blob/master/gy6/MyGoats.java)
+
+---
+### Feladat: párhuzamosított chatserver
+> Készíts olyan chat alkalmazást, amelyben a két kliensnek nem kell egymásra várnia soronként, hanem bármikor beszélhetnek egymáshoz, és ez azonnal kiíródik a másik kliensnél.
+
+részlet: 
+````Java
+try (
+	ServerSocket ss = new ServerSocket(12345);
+	) {
+	while (true) {
+		ClientData client = new ClientData(ss);
+		synchronized (otherClients) {
+			otherClients.add(client);
+		}
+
+		new Thread(() -> {
+			while (client.sc.hasNextLine()) {
+				String line = client.sc.nextLine();
+
+				synchronized (otherClients) {
+					for (ClientData other : otherClients) {
+						other.pw.println(line);
+						other.pw.flush();
+					}
+				}
+			}
+
+			synchronized (otherClients) {
+				otherClients.remove(client);
+				try {
+					client.close();
+				} catch (Exception e) {
+							// won't happen
+				}
+			}
+		}).start();
+	}
+}
+````
+egáész: [gy7/MultiThreadChatServerV3.java](https://github.com/gabboraron/orsi-osszefoglalo/blob/master/gy7/MultiThreadChatServerV3.java)
