@@ -73,8 +73,37 @@ public class ElsoKliens {
 }
 ````
 **`Scanner`nél hasznosak lehetnek:**
-`sc.hasNextLine()` - várja következő sort vagy a halott servert
+> `sc.hasNextLine()` - várja következő sort vagy a halott servert
+>
+> `sc.hasNext()`     - átugorja az össes whitespacet
+>
+> `sc.hasNextInt()`  - átugorja a whitespaceket és számot vár válaszként
 
-`sc.hasNext()`     - átugorja az össes whitespacet
+### Feladat: kliens küld -> szerver feldolgoz -> kliens visszakapja a feldolgozottat
+eredeti: [gyak2](https://github.com/gabboraron/orsi-gyak2)
 
-`sc.hasNextInt()`  - átugorja a whitespaceket és számot vár válaszként
+fájlok: [mintafájl-0ra lép ki](https://github.com/gabboraron/orsi-osszefoglalo/blob/master/gy2/Szerver3.java) [saját megoldás-karakteres üzenetre lép ki](https://github.com/gabboraron/orsi-osszefoglalo/blob/master/gy2/server.java)
+
+> A kliens küldjön át sorban egész számokat a szervernek. A számokat a kliens egy fájlból olvassa be. A szerver mindegyik számra meghív egy függvényt, ami egész számot készít (mondjuk `n ↦ 2*n+1`), majd az eredményt visszaküldi a kliensnek. A kliens a visszakapott eredményeket egy fájlba írja ki sorban. Ha a `0` szám következne a kliensoldalon, akkor a kliens kilép.
+>
+> * A kliens most küldje át az összes adatot a szervernek, és csak utána fogadja a visszaérkező számokat; hasonlóan, a szerver fogadja az összes számot, és csak utána küldje el őket átalakítva a kliensnek.
+> 
+> * A szerver várakozzon a kliens kilépése után új kliensre, és ez ismétlődjön a végtelenségig.
+
+Az érdekes rész a **sorban egymás után végtelen sok klienst kiszolgáló szerver**:
+````Java
+while (true){
+	try (
+		ServerSocket ss = new ServerSocket(PORT);
+		Socket s = ss.accept();
+		Scanner sc = new Scanner(s.getInputStream());
+		PrintWriter pw = new PrintWriter(s.getOutputStream());
+		) {
+		while(sc.hasNextInt()){
+			Integer nr = sc.nextInt(); 	//beérkezik az adat
+			tmp.add(toInt(nr));		//feldolgozás
+		}	
+		answer(tmp, pw);	//válasz
+	}
+}
+````
