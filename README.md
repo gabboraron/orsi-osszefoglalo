@@ -362,3 +362,34 @@ String reply = rmiServer.appendTxt(text);
 >
 > [gy10](https://github.com/gabboraron/orsi-gyak10)
 **A táblákon csak a szokásos SQL parancsok használhatóak!**
+
+----
+
+## Osztott ZH 2019.05.20.
+> Elégségesért az alapfeladatot kell teljesen megoldani.
+> - Az adatok (osztály neve, port stb.) a megadott alakban szerepeljenek a programban.
+> - A megoldáshoz célszerű osztályokat, segédfüggvényeket, adatszerkezeteket stb. létrehozni.
+> - Használhatók az alábbi segédanyagok:
+>   - A JDK dokumentációja itt érhető el.
+>   - A gyakorlatok anyagai (és az adatbáziskezeléshez szükséges jar fájlok) itt érhetők el.
+> - A megoldást teljesen önállóan kell elkészíteni. Együttműködés/másolás esetén minden érintett fél elégtelent kap.
+> A további feladatok eggyel növelik a megszerzett jegyet, és tetszőleges sorrendben adhatók hozzá a programhoz.
+> Beadás: az elkészült megoldás fájljait `zip`-pel kell tömöríteni a feltöltéshez. IDE-ben készült megoldásnál a teljes projekt becsomagolható.
+### Alapfeladat
+**Kidolgozva:** [Server](https://github.com/gabboraron/orsi-osszefoglalo/blob/master/vizsga%2019-05-20/Server.java) | [kliens](https://github.com/gabboraron/orsi-osszefoglalo/blob/master/vizsga%2019-05-20/AuctionClient.java) 
+> !! Az alapfeladatban se a szervernek, se a kliensnek nem kell párhuzamosan (több szálon) működnie.
+> Készíts olyan szervert az Auction osztályba, amely a `2121` porton indul el, és egy aukciós házat szimulál.
+> A szerver egy klienst vár, majd a kliens lecsatlakozása után csatlakozhat újabb, és újabb kliens. A kliensek szövegesen kommunikálnak a szerverrel; az első sorban elküldik a nevüket, majd a következő sorokban az alábbi három lehetőségből választhatnak.
+> - `put <item_name>`: az adott nevű tárgyat meghirdeti (tegyük fel, hogy még nincs azonos nevű tárgy), kezdetben `0` áron
+> - `list`: lekérdezi a meghirdetett tárgyakat. A szerver először elküld egy számot (hány meghirdetett tárgy van), majd soronként egyet-egyet a `név ár nyertes` formában
+> - `bid <item_name>`: a felhasználó licitál a tárgyra, eggyel megnövelve az értékét, és az aktuális nyertest a felhasználóra állítva
+> Ehhez a szerverhez készíts egy klienst is az `AuctionClient` programba.
+### +1
+> Módositsd a szervert, hogy egyszerre tetszőlegesen sok klienst engedjen csatlakozni, és mind párhuzamosan használhassák az előző feladatban megvalósított parancsokat.
+> Az aukciók legyenek limitált idejűek: a meghirdetéstől számítva 30 másodpercig tartanak. Az idő lejárta után befejeződnek: többet nem lehet rájuk licitálni, és nem jelennek meg a listában. Amikor az aukció lejár, a szerver üzenetet küld a győztes kliensnek a nyereményéről.
+### +1
+> A szerver exportáljon egy RMI objektumot, amely a `BidHistory` interfészen keresztül, a `bid_history` néven érhető el.
+> Az interfésznek legyen egy olyan metódusa, ami visszaadja az összes eddigi licit adatait (ki, mire, mennyiért) egy időben növekvő listában.
+> Az interfész másik metódusát meghívva lehessen átváltani nyitva/zárvatartás között. Amíg az aukciós ház zárva tart, a licitálás szünetel, és a szerver egy ezt jelző üzenetet küld vissza a klienseknek.
+### +1
+> A szerver tárolja el adatbázisban, ki hány tárgyat hirdetett meg eddig összesen. Ez az érték maradjon meg a szerver újraindításakor is, ne kezdődjön előről nulláról. Mindenki maximum három tárgyat hirdethet meg - az afölötti kéréseket a szerver figyelmen kívül hagyja.
