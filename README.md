@@ -385,6 +385,7 @@ String reply = rmiServer.appendTxt(text);
 > - `bid <item_name>`: a felhasználó licitál a tárgyra, eggyel megnövelve az értékét, és az aktuális nyertest a felhasználóra állítva
 > Ehhez a szerverhez készíts egy klienst is az `AuctionClient` programba.
 ### +1
+**Kidolgozva:** [Server2](https://github.com/gabboraron/orsi-osszefoglalo/blob/master/vizsga%2019-05-20/Server2.java) | [Kliens](https://github.com/gabboraron/orsi-osszefoglalo/blob/master/vizsga%2019-05-20/AuctionClient2.java)
 > Módositsd a szervert, hogy egyszerre tetszőlegesen sok klienst engedjen csatlakozni, és mind párhuzamosan használhassák az előző feladatban megvalósított parancsokat.
 > Az aukciók legyenek limitált idejűek: a meghirdetéstől számítva 30 másodpercig tartanak. Az idő lejárta után befejeződnek: többet nem lehet rájuk licitálni, és nem jelennek meg a listában. Amikor az aukció lejár, a szerver üzenetet küld a győztes kliensnek a nyereményéről.
 ### +1
