@@ -403,3 +403,12 @@ String reply = rmiServer.appendTxt(text);
 > Készíts egy `ujsag.Server` típust. Ami egy futtatható' Java osztály. A main függvény indítson egy szervert, az első paranccsori paraméterként megadott porton. es várja egymás utáni kliensek csatlakozásat. A klienstöl csatlakozás után először egy sort várjon. ami a cikk címét tartalmazza. majd ezután szavak sorozatát A szerver nem küld válaszokat a kliensnek 
 > A szerver tárolja el a kapott cikkeket egy adatszerkezetbe. Amennyiben egy cikk korábban már létezett. azt írja felül. 
 > Keszits egy `ujsag.iro` nevü futtatható Java osztályt. A program kérjen be a felhasználótól a standard bemeneten egy címet. majd szavak listáját a standard bemenet zárásáig. és azokat folyamatosan küldje el a paranccsori paraméterként megkapott szerveren. (az első parancssori paraméter a host. a második a port) 
+
+## Osztott ZH - régebbi2
+### Alapfeladat
+**Kidolgozva:** [Server](https://github.com/gabboraron/orsi-osszefoglalo/blob/master/vizsga-regi2/Szerver.java) 
+> Készíts sportmérkőzések lebonyolítására egy szerver-kliens alkalmazást. 
+> - Készíts egy `sport.Pont` típust, ami azt reprezentálja, ha egy csapat pontot szerzett. Tartalmazzon két adattagot: hányadik csapat (1, vagy 2) szerezte a pontot. és a játék hányadik másodpercében. 
+> - Készíts egy `sport.Merkozes` típust, ami egy mérkőzést reprezentál: tartalmaz két csapatnevet (stringek), valamint a pontok listáját. 
+> - Készíts egy `sport.Szerver` típust, ami egy futtatható Java osztály. A main függvény indítson egy szervert az első paranccsori paraméterként megadott porton, es várja egymás utáni kliensek csatlakozásat. A klienstől csatlakozás után először két sort várjon. ami a két csapat nevét tartalmazza, majd ezután pontok sorozatát. A kliens a pontoknál csak azt küldi el. melyik csapat szerezte a pontot (szám formájában), az idő automatikusan számolódik az alapján, a kliens hány rnásodperce csatlakozott. A szerver nem küld válaszokat a kliensnek. A szerver jelenítse meg a standard kimeneten az aktuális mérkőzés információit minden változás után. 
+> - Készíts egy `sport.Feljegyzo` nevű futtatható Java osztályt. A program kérjen be a felhasználótól a standard bemeneten két csapatnevet, majd sorok listáját a jatek_vege. üzenetig. A sorok vagy 1-est. vagy 2-est, vagy a latek_vege“ üzenetet tartalmazhatják. 
