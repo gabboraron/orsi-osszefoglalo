@@ -394,3 +394,12 @@ String reply = rmiServer.appendTxt(text);
 > Az interfész másik metódusát meghívva lehessen átváltani nyitva/zárvatartás között. Amíg az aukciós ház zárva tart, a licitálás szünetel, és a szerver egy ezt jelző üzenetet küld vissza a klienseknek.
 ### +1
 > A szerver tárolja el adatbázisban, ki hány tárgyat hirdetett meg eddig összesen. Ez az érték maradjon meg a szerver újraindításakor is, ne kezdődjön előről nulláról. Mindenki maximum három tárgyat hirdethet meg - az afölötti kéréseket a szerver figyelmen kívül hagyja.
+
+## Osztott ZH - régebbi
+### Alapfeladat
+**Kidolgozva:** [Server](https://github.com/gabboraron/orsi-osszefoglalo/blob/master/vizsga-regi/Szerver.java) | [Kliens](https://github.com/gabboraron/orsi-osszefoglalo/blob/master/vizsga-regi/Iro.java)  
+> Készíts cikkek írására egy szerver-kliens alkalmazást. 
+> Készíts egy `ujsag.Cikk` típust, ami egy cikket tartalmaz, egy címet. valamint szavak listáját. 
+> Készíts egy `ujsag.Server` típust. Ami egy futtatható' Java osztály. A main függvény indítson egy szervert, az első paranccsori paraméterként megadott porton. es várja egymás utáni kliensek csatlakozásat. A klienstöl csatlakozás után először egy sort várjon. ami a cikk címét tartalmazza. majd ezután szavak sorozatát A szerver nem küld válaszokat a kliensnek 
+> A szerver tárolja el a kapott cikkeket egy adatszerkezetbe. Amennyiben egy cikk korábban már létezett. azt írja felül. 
+> Keszits egy `ujsag.iro` nevü futtatható Java osztályt. A program kérjen be a felhasználótól a standard bemeneten egy címet. majd szavak listáját a standard bemenet zárásáig. és azokat folyamatosan küldje el a paranccsori paraméterként megkapott szerveren. (az első parancssori paraméter a host. a második a port) 
