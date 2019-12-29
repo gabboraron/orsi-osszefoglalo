@@ -21,7 +21,7 @@
 - számítási kapacitást visz át, elosztott rendszerekbe, ahol bucketeekben dolgoznak a felhasználók
 
 **[FrostWire](https://www.frostwire.com/)**
-- Cloud danwloader, Bit Torrent client, media player, preview and play while danwload
+- Cloud downloader, Bit Torrent client, media player, preview and play while download
 - connect to different torrent search engine
 
 **[Bit Torrent](https://www.bittorrent.com/)**
