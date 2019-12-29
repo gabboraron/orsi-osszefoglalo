@@ -1,5 +1,38 @@
 # Összefoglaló
+**Tartalom:**
+- [Elméleti összefgolaló]()
+  - [Kapcsolódó programok]()
+  - [Irodalom]()
+- [Gyakorlati összefoglaló]()
+----
+# Elméleti összefoglaló
 
+
+## Kapcsolódó programok
+
+**[Owncloud](https://owncloud.org/)**
+- személyes felhő, megy rpi-n is
+
+**[Amazon EC2](https://aws.amazon.com/ec2/)**
+- számítási kapacitást visz át, elosztott rendszerekbe, ahol bucketeekben dolgoznak a felhasználók
+
+**[FrostWire](https://www.frostwire.com/)**
+- Cloud danwloader, Bit Torrent client, media player, preview and play while danwload
+- connect to different torrent search engine
+
+**[Bit Torrent](https://www.bittorrent.com/)**
+- megkeresi a bit torent index fájlt a fájlszerveren (Pirate Bay)
+- tovább meg a trackerhez a `.torent`fájlban talált pointer alapján
+- a tracker megmondja, hogy kinek lehet meg az adott rész, úgy, hogy az aki keresi annak meglegyen az ami a másiknál hiányzik
+
+
+## Irodalom
+- [előadás anyaga](https://github.com/gabboraron/orsi-osszefoglalo/blob/master/ea/ilovepdf_merged(1).pdf)
+- [securityval kapcsolatos fájlok, előadások](https://github.com/gabboraron/orsi-osszefoglalo/commit/0513d361a8295e16a9c19f189d2a75ddee1c8a0c)
+- [Maarten van Steen könyv](https://www.distributed-systems.net/index.php/books/distributed-systems-3rd-edition-2017/ds3-sneak-preview/)
+
+--------
+# Gyakorlati összefoglaló
 ## Kliens-szerver kapcsolat
 > [kitlei.web.elte.hu/segedanyagok](http://kitlei.web.elte.hu/segedanyagok/felev/2018-2019-tavasz/osztott/osztott-feladatok.html#kliens-szerver)
 >
