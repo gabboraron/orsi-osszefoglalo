@@ -1,12 +1,16 @@
 # Összefoglaló
 **Tartalom:**
-- [Elméleti összefgolaló]()
-  - [Kapcsolódó programok]()
-  - [Irodalom]()
-- [Gyakorlati összefoglaló]()
+- [Elméleti rész főbb fogalmai](https://github.com/gabboraron/orsi-osszefoglalo#elméleti-összefoglaló)
+  - [Kapcsolódó programok](https://github.com/gabboraron/orsi-osszefoglalo#kapcsolódó-programok)
+  - [Irodalom](https://github.com/gabboraron/orsi-osszefoglalo#irodalom)
+- [Gyakorlati összefoglaló](https://github.com/gabboraron/orsi-osszefoglalo#gyakorlati-összefoglaló)
+- [gyakorlati rész anyaga hordozható formában](https://github.com/gabboraron/orsi-osszefoglalo/blob/master/portable.rar)
 ----
-# Elméleti összefoglaló
-
+# Elméleti rész főbb fogalmai
+**Főbb irányvonalak:**
+- Grid
+- Cloud
+- infomrációs rendszerek
 
 ## Kapcsolódó programok
 
@@ -23,11 +27,12 @@
 **[Bit Torrent](https://www.bittorrent.com/)**
 - megkeresi a bit torent index fájlt a fájlszerveren (Pirate Bay)
 - tovább meg a trackerhez a `.torent`fájlban talált pointer alapján
-- a tracker megmondja, hogy kinek lehet meg az adott rész, úgy, hogy az aki keresi annak meglegyen az ami a másiknál hiányzik
+- a tracker megmondja, hogy kinek lehet meg az adott rész, nem pontosan, csak lehetőségként, úgy, hogy az aki keresi annak meglegyen az ami a másiknál hiányzik
+-  [magnet link](https://www.vuze.com/about-torrents/magnet-links)ek egy P2P rendszerre mutató pointerek
 
 
 ## Irodalom
-- [előadás anyaga](https://github.com/gabboraron/orsi-osszefoglalo/blob/master/ea/ilovepdf_merged(1).pdf)
+- [egész féléves előadás anyaga egyben](https://github.com/gabboraron/orsi-osszefoglalo/blob/master/ea/ilovepdf_merged(1).pdf)
 - [securityval kapcsolatos fájlok, előadások](https://github.com/gabboraron/orsi-osszefoglalo/commit/0513d361a8295e16a9c19f189d2a75ddee1c8a0c)
 - [Maarten van Steen könyv](https://www.distributed-systems.net/index.php/books/distributed-systems-3rd-edition-2017/ds3-sneak-preview/)
 
