@@ -14,13 +14,17 @@
 
 **Virtualizáció**
 > A `hardware -> Interface -> Hardware/software system` átalakítja `program -> Interface A -> Implementation of mimicking A on B -> Interface B -> Hardware/software system B` alakká.
-__*Szerkezete*__
+
+***Szerkezete***
 - Application
   - Library functions
   - Operating system, sys calls
 - Hardware -> general instructions,Prvileged instructions
-__*Process VM és VM monitor*__
+
+***Process VM és VM monitor***
+
 *JAVA*
+
 > minden bytcode egy "mini program", a runtimeban van futtatva:
 - Application
 - Runtime sys
@@ -32,6 +36,7 @@ __*Process VM és VM monitor*__
 - Operating system
 - Virtual machine monitor
 - Hardware
+
 > **Előnyei a *JAVA* féle megoldáshoz képest:**
 >
 > A teljes `Application` és `OS` réteget egy teljesen új `gép`re viheti át. **Ekkor a `VM Monitor` egy operációs rendszer!** Azaz nagyon egszerű rendszerekkel rendelkezik, a minimális driverekkel és hasonlókkal, de egy teljes OS tulajdonságaival ugyankkor a minimális tulajdonságokkal amik a feladat végrehajtásához szükségesek.
