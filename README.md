@@ -12,6 +12,40 @@
 - Cloud
 - infomrációs rendszerek
 
+**Virtualizáció**
+> A `hardware -> Interface -> Hardware/software system` átalakítja `program -> Interface A -> Implementation of mimicking A on B -> Interface B -> Hardware/software system B` alakká.
+__*Szerkezete*__
+- Application
+  - Library functions
+  - Operating system, sys calls
+- Hardware -> general instructions,Prvileged instructions
+__*Process VM és VM monitor*__
+*JAVA*
+> minden bytcode egy "mini program", a runtimeban van futtatva:
+- Application
+- Runtime sys
+  - Operating system
+- Hardware
+
+*VMware, VirtualBox*
+- Applications 
+- Operating system
+- Virtual machine monitor
+- Hardware
+> **Előnyei a *JAVA* féle megoldáshoz képest:**
+>
+> A teljes `Application` és `OS` réteget egy teljesen új `gép`re viheti át. **Ekkor a `VM Monitor` egy operációs rendszer!** Azaz nagyon egszerű rendszerekkel rendelkezik, a minimális driverekkel és hasonlókkal, de egy teljes OS tulajdonságaival ugyankkor a minimális tulajdonságokkal amik a feladat végrehajtásához szükségesek.
+> 
+> Tehát közvelten a hardwaerhez van útja a az `App` és `OS` rétegnek, hiszen a `VM`közbvetlen a hardwaret szólítja meg.
+
+
+**USER level és kernel level szálak**
+[stackowerflow](https://stackoverflow.com/questions/15983872/difference-between-user-level-and-kernel-supported-threads)
+> a lényege, hogy az egyiket a processzor szintjén hozzuk létre, a másikat pedig a programnak kiosztott erőforrásokban hozzuk létre
+
+**Interaktív program**
+> Olyan program ami felhasználó interakciói nélkül nem műödne, pl MS-Excel, [bővebben](https://www.computerhope.com/jargon/i/inteprog.htm)
+
 ## Kapcsolódó programok
 
 **[Owncloud](https://owncloud.org/)**
@@ -30,6 +64,8 @@
 - a tracker megmondja, hogy kinek lehet meg az adott rész, nem pontosan, csak lehetőségként, úgy, hogy az aki keresi annak meglegyen az ami a másiknál hiányzik
 -  [magnet link](https://www.vuze.com/about-torrents/magnet-links)ek egy P2P rendszerre mutató pointerek
 
+**[VirtualBox](https://www.virtualbox.org/)**
+- VM teszteléshez
 
 ## Irodalom
 - [egész féléves előadás anyaga egyben](https://github.com/gabboraron/orsi-osszefoglalo/blob/master/ea/ilovepdf_merged(1).pdf)
