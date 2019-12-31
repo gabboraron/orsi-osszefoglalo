@@ -33,7 +33,7 @@
 
 *VMware, VirtualBox*
 - Applications 
-- Operating system
+  - Operating system
 - Virtual machine monitor
 - Hardware
 
