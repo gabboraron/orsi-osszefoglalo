@@ -45,11 +45,19 @@
 
 
 **USER level és kernel level szálak**
+
 [stackowerflow](https://stackoverflow.com/questions/15983872/difference-between-user-level-and-kernel-supported-threads)
 > a lényege, hogy az egyiket a processzor szintjén hozzuk létre, a másikat pedig a programnak kiosztott erőforrásokban hozzuk létre
 
 **Interaktív program**
 > Olyan program ami felhasználó interakciói nélkül nem műödne, pl MS-Excel, [bővebben](https://www.computerhope.com/jargon/i/inteprog.htm)
+
+**mobil IP**
+> Az `IP`t kiosztó `home server` újrahosztol
+> 
+> `anycast` - továbbítja a hozzá kapcsolódó routereknek a csomagot 
+>
+> `changeroute` - az olvasási pontot átteszi máshova
 
 ## Kapcsolódó programok
 
@@ -72,6 +80,9 @@
 **[VirtualBox](https://www.virtualbox.org/)**
 - VM teszteléshez
 
+**[planetlab](https://www.planet-lab.org/)**
+- egy elosztott szerverkutatóhálózatok között
+
 ## Irodalom
 - [egész féléves előadás anyaga egyben](https://github.com/gabboraron/orsi-osszefoglalo/blob/master/ea/ilovepdf_merged(1).pdf)
 - [securityval kapcsolatos fájlok, előadások](https://github.com/gabboraron/orsi-osszefoglalo/commit/0513d361a8295e16a9c19f189d2a75ddee1c8a0c)
@@ -82,7 +93,7 @@
 ## Kliens-szerver kapcsolat
 > [kitlei.web.elte.hu/segedanyagok](http://kitlei.web.elte.hu/segedanyagok/felev/2018-2019-tavasz/osztott/osztott-feladatok.html#kliens-szerver)
 >
->[orsi-gyak1](https://github.com/gabboraron/orsi-gyak1)
+> [orsi-gyak1](https://github.com/gabboraron/orsi-gyak1)
 
 mintafájlok: [gy1/ElsoSzerver.java](https://github.com/gabboraron/orsi-osszefoglalo/blob/master/gy1/ElsoSzerver.java) | [gy1/ElsoKliens.java](https://github.com/gabboraron/orsi-osszefoglalo/blob/master/gy1/ElsoKliens.java) | [gy1/Szerver2.java](https://github.com/gabboraron/orsi-osszefoglalo/blob/master/gy1/Szerver2.java)
 
