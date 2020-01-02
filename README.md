@@ -63,6 +63,7 @@
 
 *Kliens oldal*
 > az interface a paraméterekt becsomagolva elküldi a szervernek
+
 *Szerver oldal*
 > megkapja a paramétereket, ugyanazzal a paraméterrel és meghívja az azonos  paraméterezésű, azonos nevű progamot
 >
