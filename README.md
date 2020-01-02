@@ -7,21 +7,21 @@
 - [gyakorlati rész anyaga hordozható formában](https://github.com/gabboraron/orsi-osszefoglalo/blob/master/portable.rar)
 ----
 # Elméleti rész főbb fogalmai
-**Főbb irányvonalak:**
+### Főbb irányvonalak:
 - Grid
 - Cloud
 - infomrációs rendszerek
 
-**Virtualizáció**
+### Virtualizáció
 > A `hardware -> Interface -> Hardware/software system` átalakítja `program -> Interface A -> Implementation of mimicking A on B -> Interface B -> Hardware/software system B` alakká.
 
-***Szerkezete***
+#### Szerkezete
 - Application
   - Library functions
   - Operating system, sys calls
 - Hardware -> general instructions,Prvileged instructions
 
-***Process VM és VM monitor***
+#### *Process VM és VM monitor*
 
 *JAVA*
 
@@ -44,20 +44,52 @@
 > Tehát közvelten a hardwaerhez van útja a az `App` és `OS` rétegnek, hiszen a `VM`közbvetlen a hardwaret szólítja meg.
 
 
-**USER level és kernel level szálak**
+### USER level és kernel level szálak
 
 [stackowerflow](https://stackoverflow.com/questions/15983872/difference-between-user-level-and-kernel-supported-threads)
 > a lényege, hogy az egyiket a processzor szintjén hozzuk létre, a másikat pedig a programnak kiosztott erőforrásokban hozzuk létre
 
-**Interaktív program**
+### Interaktív program
 > Olyan program ami felhasználó interakciói nélkül nem műödne, pl MS-Excel, [bővebben](https://www.computerhope.com/jargon/i/inteprog.htm)
 
-**mobil IP**
+### mobil IP
 > Az `IP`t kiosztó `home server` újrahosztol
 > 
 > `anycast` - továbbítja a hozzá kapcsolódó routereknek a csomagot 
 >
 > `changeroute` - az olvasási pontot átteszi máshova
+
+### RPC
+
+*Kliens oldal*
+> az interface a paraméterekt becsomagolva elküldi a szervernek
+*Szerver oldal*
+> megkapja a paramétereket, ugyanazzal a paraméterrel és meghívja az azonos  paraméterezésű, azonos nevű progamot
+>
+> middleware szempontból  csak a szerveren a kicsomagols és újraparaméterezés az érdekes
+
+***Részletesen:***
+- a kliens eljárás meghívja a csatolót
+- a csatoló létrehozza az üzenetet, meghívja a kliens OSét
+  *a csatoló egy olyan kódrészlet ami átalakítja a bemeneti kódot a szálításhoz és az OS hívásokhoz* 
+- a kliens OS elküldi az üzenetet a távoli gép OSére
+- a távoli gép OSe megkapja az üznet és a helyi csatolónak átadja
+- a távoli gépen kicsomagolódik az üzenet és meghívvja a megszólított szervert
+- a szerver elvégzí a szükséges hívásokat és visszatér a kért értékkel
+- a távoli gép OSének csatolójával becsomagolódik a szerver válasza
+- a távoli gép OSe elküldi a kliens OSnek
+- a kliens OS megkapja, és átadja kicsomagolásra a csatolónak
+- kicsomagolódik a válasz a kliensnél és átadja a kliens függvénynek ami a hívást kezdeményezte
+> Ilyenkor a httérben a szerver és a kliens egy "közös" headert használnak, de a gnerált kód külön-külön a szerveren és a kliensen jelenik meg a helyi (klines/szerver) linkeren keresztül, et a **DCE**
+
+### DCE
+> Tehát ez olyan, mintha egy köztes gép lenne, ami a szükséges fájlokat tárolja, amikre mindkét oldalnak szükésge van, de gy ilyen felállásban ha a köztes szerver ami a headereket tárolja(*Directory server*) meghal akkor a rendszer is használhatatlan az új kliensek számára, a régieknél már be van linkelve a szükséges fájl.
+***Részletese menete:***
+- Register server endpoint
+- register service from Direcotry server to server
+- Client look up for directory server
+- Client ask for server's endpoint
+- Clinet do `RPC`
 
 ## Kapcsolódó programok
 
