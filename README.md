@@ -92,6 +92,16 @@
 - Client ask for server's endpoint
 - Clinet do `RPC`
 
+### content based routing 
+> ccollections of brokers in a network and let to route the msg to broker to broker
+
+### content based broker
+> don't thell to the broker what the msssg is about and the broke find it out
+>
+> ssometimes is more complicated
+
+
+
 ## Kapcsolódó programok
 
 **[Owncloud](https://owncloud.org/)**
